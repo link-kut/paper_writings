@@ -48,7 +48,8 @@
 \usepackage{lmodern}
 \usepackage{epsfig}
 \usepackage{amsthm}
-
+\usepackage{epstopdf}
+\epstopdfsetup{outdir=./}
 \usepackage{array}
 \usepackage{algorithmicx}
 \usepackage[ruled]{algorithm}
@@ -199,10 +200,10 @@ Our betweenness computation algorithm in Section~\ref{computation} takes advanta
 
 \begin{figure}[t]
 \centering
-\subfigure[A given network]{\includegraphics[width=0.65\linewidth]{figs-original.pdf}}\label{original}
-\subfigure[Ego network, $\EN{v}$]{\includegraphics[width=0.32\linewidth]{ego2.pdf}}\label{eego_b}
-\subfigure[Second-order ego network]{\includegraphics[width=0.49\linewidth]{second-order.pdf}}\label{soego}
-\subfigure[Second-layered ego network, $\XN{v}$]{\includegraphics[width=0.49\linewidth]{xego2.pdf}}\label{eego_c}
+\subfigure[A given network]{\includegraphics[width=0.65\linewidth]{./images/figs-original.pdf}}\label{original}
+\subfigure[Ego network, $\EN{v}$]{\includegraphics[width=0.32\linewidth]{./images/ego2.pdf}}\label{eego_b}
+\subfigure[Second-order ego network]{\includegraphics[width=0.49\linewidth]{./images/second-order.pdf}}\label{soego}
+\subfigure[Second-layered ego network, $\XN{v}$]{\includegraphics[width=0.49\linewidth]{./images/xego2.pdf}}\label{eego_c}
 \caption{The ego, multi-order, and multi-layered ego networks of vertex $v$}
 \label{eego2}
 \end{figure} 
@@ -516,7 +517,7 @@ Therefore, by Theorem \ref{theorem4}, $\D{a}{h}{v}\!=\!\bar{H}(\{\D{a}{n}{v} : n
 %% bibitems, please use
 %%
 \bibliographystyle{elsarticle-num-names} 
-\bibliography{linkPaper}
+\bibliography{../linkPaper}
 
 %% else use the following coding to input the bibitems directly in the
 %% TeX file.
