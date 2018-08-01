@@ -14,13 +14,12 @@ Since the packet is classified using the information of the packet header, if th
 In addition, because of rule-based packet classification with IP and port information of packet header, there are local limitations.
 Therefore, when a new network accesses or packets of a new network occur, there is a problem that a new rule must be redefined.
 
-fangfan Li et al. []
-At least it was used to lower the dependency of packet header information.
+fangfan Li et al. [] At least it was used to lower the dependency of packet header information.
 Using this approach, they found that our packets haping device uses HTTP and TLS-handshake fields in their matching rules, and only for the first packet in each direction.
 If there is similar information in the header information of the incoming packet using the header information found in the first packet, it is classified as the packet of the same type.
 Although the IP and port number of the packet is used less, the method of classifying the subsequent packets by using the header information of the first packet also depends on the header information.
 
-\subsection{Classify Packets Using  Deep Learning}
+\subsection{Classify Packets Using Deep Learning}\label{subsec:classifyPacketsUsingDeepLearning}
 Several studies using deep learning have been conducted recently.
 Also, researches to utilize machine learning in networks are actively being conducted.
 Accordingly, studies are being actively carried out to perform packet classification using deep learning of network.
