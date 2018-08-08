@@ -1,4 +1,4 @@
-t%% 
+%%
 %% Copyright 2007-2018 Elsevier Ltd
 %% 
 %% This file is part of the 'Elsarticle Bundle'.
@@ -56,9 +56,6 @@ t%%
 \usepackage{algpseudocode, caption}
  
 \usepackage[cmex10]{amsmath}
-
-
-
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
 
@@ -76,6 +73,7 @@ t%%
 
 \newcommand{\EN}[1]{\mathcal{E}_{{#1}}}
 \newcommand{\ENN}[2]{\mathcal{E}_{{#1}}^{{#2}}}
+\newcommand{\FNN}[2]{\mathcal{F}_{{#1}}^{{#2}}}
 \newcommand{\XN}[1]{\mathcal{X}_{{#1}}}
 \newcommand{\CC}[1]{\mathcal{C}_{{#1}}}
 
@@ -122,7 +120,7 @@ t%%
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Multi-order Ego Network Betweenness}
+\title{Multi-order Friendship Network Betweenness}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -162,17 +160,8 @@ In this section, we define terms that represent two types of ego networks, ego n
 We then present several properties of the multi-layered ego networks (Section~\ref{x-go_properties}).
 Our betweenness computation algorithm in Section~\ref{computation} takes advantage of these properties.
 
-In this section, we define terms that represent two types of ego networks, ego networks and multi-layered ego networks (Section~\ref{x-ego_definition}), as well as the betweenness of a vertex in its ego and x-ego networks (Section~\ref{sec:betweenness}).
-We then present several properties of the multi-layered ego networks (Section~\ref{x-go_properties}).
-Our betweenness computation algorithm in Section~\ref{computation} takes advantage of these properties.
-
-In this section, we define terms that represent two types of ego networks, ego networks and multi-layered ego networks (Section~\ref{x-ego_definition}), as well as the betweenness of a vertex in its ego and x-ego networks (Section~\ref{sec:betweenness}).
-We then present several properties of the multi-layered ego networks (Section~\ref{x-go_properties}).
-Our betweenness computation algorithm in Section~\ref{computation} takes advantage of these properties.
-
-In this section, we define terms that represent two types of ego networks, ego networks and multi-layered ego networks (Section~\ref{x-ego_definition}), as well as the betweenness of a vertex in its ego and x-ego networks (Section~\ref{sec:betweenness}).
-We then present several properties of the multi-layered ego networks (Section~\ref{x-go_properties}).
-Our betweenness computation algorithm in Section~\ref{computation} takes advantage of these properties.aaaa
+An ego network (also called egocentric network) consists of the alters connected to ego, along with the links between
+ego and alters, and links among alters (\cite{ego:2018}).
 
 \section{Multi-order Friendship Networks}\label{sec:multi-order-friendship-network}
 \input{multi-order-friendship-networks}
@@ -200,7 +189,7 @@ Our betweenness computation algorithm in Section~\ref{computation} takes advanta
 %% If you have bibdatabase file and want bibtex to generate the
 %% bibitems, please use
 %%
-\bibliographystyle{elsarticle-num-names} 
+\bibliographystyle{elsarticle-num-names}
 \bibliography{../../LinkPaper}
 
 %% else use the following coding to input the bibitems directly in the
