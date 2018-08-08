@@ -78,8 +78,8 @@
 \newcommand{\CC}[1]{\mathcal{C}_{{#1}}}
 
 \newcommand{\B}[1]{B({#1})}
-\newcommand{\BE}[1]{B^{\mathcal{E}}({#1})}
-\newcommand{\BX}[1]{B^{\mathcal{X}}({#1})}
+\newcommand{\BE}[2]{B_{{#1}}^{\mathcal{E}}({#2})}
+\newcommand{\BF}[2]{B_{{#1}}^{\mathcal{F}}({#2})}
 
 \newcommand{\NX}{n_{x}}
 \newcommand{\MX}{m_{x}}
@@ -87,6 +87,7 @@
 \newcommand{\ME}{m_{e}}
 \newcommand{\NC}{n_{c}}
 \newcommand{\MC}{m_{c}}
+
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -120,7 +121,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Multi-order Friendship Network Betweenness}
+\title{Multi-order Egocentric Friendship Network and Its Betweenness}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -132,15 +133,15 @@
 \address{}
 
 \begin{abstract}
-In this section, we define terms that represent two types of ego networks, ego networks and multi-layered ego networks (Section~\ref{x-ego_definition}), as well as the betweenness of a vertex in its ego and x-ego networks (Section~\ref{sec:betweenness}).
-We then present several properties of the multi-layered ego networks (Section~\ref{x-go_properties}).
+In this section, we define terms that represent two types of egocentric networks, egocentric networks and multi-layered egocentric networks (Section~\ref{x-ego_definition}), as well as the betweenness of a vertex in its ego and x-egocentric networks (Section~\ref{sec:betweenness}).
+We then present several properties of the multi-layered egocentric networks (Section~\ref{x-go_properties}).
 Our betweenness computation algorithm in Section~\ref{computation} takes advantage of these properties.
 
 
 \end{abstract}
 
 \begin{keyword}
-Ego Networks \sep Betweenness Centrality
+Egocentric Networks \sep Betweenness Centrality
 %% keywords here, in the form: keyword \sep keyword
 
 %% PACS codes here, in the form: \PACS code \sep code
@@ -156,14 +157,18 @@ Ego Networks \sep Betweenness Centrality
 
 %% main text
 \section{Introduction}\label{sec:introduction}
-In this section, we define terms that represent two types of ego networks, ego networks and multi-layered ego networks (Section~\ref{x-ego_definition}), as well as the betweenness of a vertex in its ego and x-ego networks (Section~\ref{sec:betweenness}).
-We then present several properties of the multi-layered ego networks (Section~\ref{x-go_properties}).
+In this section, we define terms that represent two types of egocentric networks, egocentric networks and multi-layered egocentric networks (Section~\ref{x-ego_definition}), as well as the betweenness of a vertex in its ego and x-egocentric networks (Section~\ref{sec:betweenness}).
+We then present several properties of the multi-layered egocentric networks (Section~\ref{x-go_properties}).
 Our betweenness computation algorithm in Section~\ref{computation} takes advantage of these properties.
 
-An ego network (also called egocentric network) consists of the alters connected to ego, along with the links between
+An egocentric network (also called egocentric network) consists of the alters connected to ego, along with the links between
 ego and alters, and links among alters (\cite{ego:2018}).
 
-\section{Multi-order Friendship Networks}\label{sec:multi-order-friendship-network}
+
+Our betweenness computation algorithm in Section~\ref{sec:betweenness} takes advantage of these properties.
+
+
+\section{Multi-order Egocentric Friendship Networks and Their Betweenness}\label{sec:multi-order-friendship-network}
 \input{multi-order-friendship-networks}
 
 \section{Betweenness in Multi-order Friendship Networks}\label{sec:betweenness}
