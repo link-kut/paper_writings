@@ -1,0 +1,47 @@
+This chapter describes learning models that are used to classify network traffic using deep learning.
+The Deep Learning model used is the Convolution Neural Network (CNN), the Residual Network (ResNet), the Recurrent Neural Network (RNN), the Long Short-Term Memory LSTM) and the Convolution and Recurrent Neural Network (CNN + RNN). The Deep Learning model was supported by Keras, and the ResNet and CNN + RNN models were generated using Keras' CNN and RNN models simultaneously.
+
+CNN and ResNet models are commonly used for information extraction, sentence classification, face recognition, and image classification.
+CNN is a structure that extracts characteristics of data and grasps patterns of features.
+In the case of RNN and LSTM, it is a model specialized for repetitive and sequential data learning.
+Therefore, the previous learning data is reflected in the current learning using the circulation structure.
+It is generally used for the composition of speech, wave and text.
+
+Therefore, in the case of CNN and ResNet, it is used to classify using imaged packet unit data generated through preprocessing.
+RNN, LSTM, and CNN + RNN models are used to classify sequential data, so they are used to classify learning data in flow units that contain sequential information of network traffic.
+
+\subsection{Convolution Neural Network Architecture}\label
+A CNN model among the deep learning models for classifying network traffic will be described.
+The model architecutre of CNN is composed of input layer, Convolution layer, and Pooling layer and Fully connected layer.
+The input layer uses the payload and label of the packet converted into learning data.
+Packets are used as input data in the input layer in the form of N × N (N = 6, 8, 16, 32) like images.
+Then, the feature of each packet data is convolved through the kernel of two Convolution layer, and output is generated through filter and activation process.
+In the pooling layer, it is the process of reducing the size of the output through the convolution process.
+It simply reduces the size of the data, cancels noise, and provides consistent features in fine detail.
+Finally, the Fully connected layer extracts the prediction value according to the last 8 classes by activation.
+
+Figure 3 is CNN architecture.
+
+\subsection{Residual Network Architecture}\label
+efefefef
+
+\subsection{Recurrent Neural Network Architecture}\label
+RNN is a network architecture that can accept inputs and outputs regardless of input data length, and can be implemented variously and flexibly as needed.
+Therefore, the architecture of RNN used in this paper is composed of multi-layer as shown in figure 4.
+In the RNN, the number of packets per flow (30, 60 and 100) is received at the input layer in order to learn flow unit data.
+The number of units to be set is then output to the number of applications learned in the output layer through the RNN cell.
+
+\subsection{Long Short-Term Memory Architecture}\label
+In addition to the existing RNN model, LSTM determines whether to keep the weight value by adding another feature layer called a cell state.
+Through this, we solve the phenomenon that the weight value is not maintained as the distance between information and information of one input data in the existing RNN becomes longer, and the learning ability decreases.
+LSTM is more persistent than existing RNN because it keeps updating the past data.
+The cell state is responsible for adding or deleting information.
+The structure of the LSTM model is configured as shown in figure 5.
+It is a single layer different from RNN.
+
+The advantage of LSTM is that each memory control is possible and the result can be controlled.
+However, there is a possibility that the memory may be overwritten, and the operation speed is slower than that of the conventional RNN.
+Therefore, it is composed of single layer different from existing RNN model.
+
+\subsection{CNN + RNN Architecture}\label
+efefefef

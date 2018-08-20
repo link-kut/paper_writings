@@ -247,18 +247,13 @@ Finally, it is an experiment to compare the elapsed time in the third experiment
 %실험 평가를 진행하기 위하여 한 플로우당 패킷의 개수를가 10, 30, 60, 100개로 하였으며, 한 패킷 당 페이로드 사이즈를 40, 80, 160으로 설정하였다. 각 Label은 그림4의 내용을 토대로 Label 데이터를 생성하였으며, 각 플로우 갯수는 Train, Validation, Test 별로 각각 8750개, 1250개, 2500개로 설정하였다. LSTM 네트워크의 배치 사이즈는 1000이며, LSTM의 Sequence Length는 플로우당 패킷의 개수와 동일하며, Hidden Size는 한 패킷 당 페이로드 사이즈와 동일하며, Hidden Size는 한 패킷 당 페이로드 사이즈와 동일하다. 최종 Output의 모양은 (플로우 개수, 5)의 형태로 출력된다.
 %그림7은 플로우당 패킷의 개수와 패킷의 페이로드 사이즈에 따른 Test Accuracy 결과를 나타낸다. 위 그림7에서 보이는 바와 같이 플로우 당 패킷의 개수가 증가함에 따라 전체적인 정확도도 올라가는 것을 볼 수 있다. 또한, 한 패킷의 페이로드 사이즈가 커지메 따라 정확도도 올라가는 것을 확인 할 수 있다. 따라서, 본 논문에서 제안하는 LSTM을 이용한 플로우 기반의 네트워크 트래픽 분류는 거의 99$\%$ 이상의 분류를 할 수 있으며, 데이터 사이즈가 커짐에 따라 그 정확도가 더 증가하는 것을 확인하였다.
 
-\subsection{Experiment Environment}
+\subsection{Experiment environment}
 Experiments were conducted on Ubuntu 16.04 LTS, using 32GB of RAM and two NVIDIA GTX 1080Ti 11GB.
 We also used Tensorflow developed by Google Brain Team in Python 3.6 environment to configure LSTM and CNN deep learning model.
 For the experiment, we have 2000 flows for each application in train data, and the number of packets per flow is set to 10, 30, 60, and 100.
 In addition, the payload size of each packet was set to 40, 80, and 160 to generate a total of 12 train data.
 
-\subsection{LSTM Model Evaluation}
-In the LSTM model evaluation experiment, it is an experiment to examine the performance of the LSTM model.
-This is an experiment that compares accuracy based on the number of packets per flow and the size of each payload.
-In figure 3, the x-axis is the number of packets per flow and the y-axis is the accuracy.
-As a result, it can be confirmed that the more the number of packets per flow, the higher the accuracy.
-In addition, it shows that the accuracy is high as the payload size of each packet increases.
+\subsection{Experiment environment}
 \begin{figure}[!t]
 \centering
 \setlength{\abovecaptionskip}{0pt}
@@ -269,39 +264,6 @@ In addition, it shows that the accuracy is high as the payload size of each pack
 \label{fig3}
 }
 \end{figure}
-
-\subsection{LSTM Model Evaluation for Each application}
-The performance of LSTM model for each application is compared.
-Confusion Matrix is ​​used to compare performance of each application of LSTM model.
-The Confusion Matrix is ​​the most widely used method for representing binary classification evaluation results.
-The Confusion Matrix shows you how well your deep-running model is categorized for each application.
-Figure x shows the Confusion Matrix, where the rows represent the negative class and the positive class, and the columns represent the predicted by negative and the predicted by positive.
-For example, TN (True Negative) refers to the case where the prediction result of the model is a negative class, which is actually a negative class.
-FP (False Positive) means that the model is predicted as a positive class, but actually it is a negative class.
-FN (False Negative) indicates that the model is predicted as a negative class, but the actual result indicates a positive class, and TP (True Positive) indicates a case where both the predicted result and the actual result are positive.
-Calculate precision, recall and f1-score based on Confusion Matrix.
-
-The precision means the percentage of actual positive predictions out of the positive predicted class, and the equation of precision is (2).
-\begin{equation}
-{precision = \frac{TP}{TP + FP}}
-\end{equation}
-
-The recall is called the positive detection rate, and it means the percentage of the total positive class predicted by a positive class, and and the equation of recall is (3).
-\begin{equation}
-{recall = \frac{TP}{TP + FN}}
-\end{equation}
-
-Finally, f1-score means the harmonic mean of precision and recall, and the equation is (4).
-\begin{equation}
-{f1-score = \frac{\rm 2 \quad x \quad precision \quad x \quad recall}{precision \quad + \quad recall}}
-\end{equation}
-The recall and precision are in conflict, and the f1-score is an index that shows the accuracy at once by integrating precision and recall.
-
-Figure 4 shows the accuracy of each application, and figure 5 shows the f1-score value for each application.
-In the case of a graph showing accuracy, the accuracy of each application increases as the number of packets per flow increases.
-Also in the case of f1-score, it can be seen that the value increases as the number of packets per flow
-However, in the case of web and bittorrent, the smaller the number of data, the lower the accuracy and the f1-score value than other applications.
-
 \begin{figure}[!t]
 \centering
 \setlength{\abovecaptionskip}{0pt}
@@ -318,21 +280,11 @@ However, in the case of web and bittorrent, the smaller the number of data, the 
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{0pt}
 {
-\includegraphics[width=3.6in, height=2.0in]{fig5.png}
-\caption{f1-score of DR-TAS for each target application}
-\label{fig7}
+\includegraphics[width=3.6in, height=2.0in]{fig5.jpg}
+\caption{Comparison on accuray of DR-TAS vs. DC-TAS }
+\label{fig5}
 }
 \end{figure}
-
-\subsection{Comparison of CNN and LSTM performance}
-This is a section to compare the performance of CNN and LSTM deep learning model.
-we compare the accuracy of each application by increasing it to 2, 3, 4, or 5 classes.
-Two applications compared CNN and LSTM by selecting RDP and Skype with high f1-score.
-In three cases, ssh was added to the two applications selected above.
-Bittorrent was added in 4 cases, and finally web was added to compare the total of 5 accuracies.
-Figure 5 shows the accuracy comparison results for the number of applications of CNN and LSTM.
-Both CNN and LSTM show that accuracy is lowered when Bittorrent and web are added.
-However, the overall accuracy of the LSTM is higher than that of CNN.
 
 \begin{figure}[!t]
 \centering
@@ -340,30 +292,6 @@ However, the overall accuracy of the LSTM is higher than that of CNN.
 \setlength{\belowcaptionskip}{0pt}
 {
 \includegraphics[width=3.6in, height=2.0in]{fig6.jpg}
-\caption{Comparison on accuray of DR-TAS vs. DC-TAS }
-\label{fig5}
-}
-\end{figure}
-
-\subsection{Comparison of CNN and LSTM elapsed time}
-We compare elapsed time from data preprocessing of CNN and LSTM to result prediction.
-The elapsed time is the sum of the preprocessing time for making the appropriate data for each model and the time taken to input the training data into the CNN and LSTM model.
-Figure 6 shows the elapsed time of CNN and LSTM, and shows the time taken to increase the number of applications as above.
-As the number of applications increases, the elapsed time increases.
-The elapsed time has increased because the amount of data to learn has increased.
-However, it can be seen that the elapsed time of 4 and 5 applications that add bittorrent and web data increases dramatically.
-The reason is that the two application data are larger than RDP, Skype, and ssh, so that the preprocessing process, which makes the data suitable for the model, takes more time.
-In addition, bittorrent and web are bigger than other applications because most of the data is image or video.
-However, in the case of LSTM, the elapsed time is less than half that of CNN as a whole.
-In the case of CNN, one packet is arbitrarily fetched from each application-specific flow in the preprocessing process, so that it takes a long time to read one flow.
-On the other hand, in the case of LSTM, since the flow is generated for each application and generated as data, the time of the preprocessing process is shorter than that of CNN.
-
-\begin{figure}[!t]
-\centering
-\setlength{\abovecaptionskip}{0pt}
-\setlength{\belowcaptionskip}{0pt}
-{
-\includegraphics[width=3.6in, height=2.0in]{fig7.jpg}
 \caption{Comparison on elapsed time of DR-TAS vs. DC-TAS}
 \label{fig6}
 }
