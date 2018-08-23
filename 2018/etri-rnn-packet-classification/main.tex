@@ -234,13 +234,6 @@ The problem with the existing vanilla RNN is that of long-term dependency if the
 
 \section{Performance evaluation}
 In this section, we present the results of classification of traffic data through the DR-TAS and DC-TAS experiments, and compare the network traffic classification results of DR-TAS with the ones of DC-TAS.
-%The experiments are divided as follows. The first is to show the accuracy of the LSTM model.
-%The second is to compare the accuracy of each application of LSTM (??).
-%To compare the accuracy of each application, we use precision, recall, and f1-score measures.
-%The third is an experiment to compare the accuracy of the CNN and LSTM models.
-%We compare the accuracy of the CNN and LSTM models by increasing the number of applications, i.e., classification
-%targets, to two, three, four, and five.
-%The last is to compare the elapsed time of the CNN and LSTM models taken during the third experiment.
 %We compare DR-TAS to deep CNN-based traffic analyzation sheme (DC-TAS). Hyunkyo-Lim write this paper.
 %본 장에서는 2장과 3장의 트래픽 데이터 처리 및 학습 데이터 생성 작업을 거친 데이터 세트를 LSTM 모델에 Feeding 하여 훈련시켰다. 플로우 단위의 데이터는 플로우 당 패킷의 개수에 따라 얼마만큼의 학습을 할지 결정할 수 있다. 또한 LSTM 훈련 시 한 셀에 들어가는 Input 데이터의 크기는 한 플로우의 한 패킷의 페이로드 사이즈와 동일하기 때문에 이 또한 플로우 기반의 분류에 영향을 줄 수 있다. 따라서, 본 논문에서 제안하는 플로우 기반의 네트워크 트래픽 분류를 위하여 플로우당 패킷의 개수와 플오우내 한 패킷의 페이로드 사이즈를 다르게 하여 실험 평가를 진행하였다.
 %실험은 Ubuntu 14.04 LTS 환경에서 실험을 진행 하였고, RAM 32GB, NVIDIA GTX 1080Ti를 사용하였다. 또한, Tensorflow 환경에서 Python을 이용하여 트래픽 분류를 위한 RNN 학습을 수행하였다.
@@ -254,41 +247,33 @@ For the experiments, we have 2000 flows for each application in train data, and 
 to 10, 30, 60, and 100.
 In addition, the payload size of each packet was set to 40, 80, and 160.
 
-\subsection{The overall accuracy of DR-TAS}
-For five applications, we examine the overall accuracy of the LSTM model with regard to various numbers of
-packets per flow and payload size of each packet, and the results are shown in Fig. \ref{fig3}.
-As shown in the figure, the more the number of packets per flow, the higher the accuracy, and the accuracy becomes high as the payload size increases.
-If particular, when the number of packets per flow is 100 and the payload size is 160, the overall
-accuracy is the highest (i.e., $99.85\%$). The lowest accuacy is $96.00\%$ when the corresponding values are 10 and 40,
-respectively.
+\subsection{Performance metrics for experiments}
+By using confusion matrix, we also compare the performance of DR-TAS for each application.
+The Confusion matrix is ​​the most widely used method for representing binary classification evaluation results.
+The Confusion matrix shows how well the deep-running model is categorized for each application.
+Fig. \ref{fig3}. shows the Confusion Matrix, where the rows represent the negative class and the positive class, and the columns represent the predicted by negative and the predicted by positive.
+For example, TN (True Negative) refers to the case where the prediction result of the model is a negative class, which is actually a negative class.
+FP (False Positive) means that the model is predicted as a positive class, but actually it is a negative class.
+FN (False Negative) indicates that the model is predicted as a negative class, but the actual result indicates a positive class, and TP (True Positive) indicates a case where both the predicted result and the actual result are positive.
 \begin{figure}[!t]
 \centering
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{0pt}
 {
 \includegraphics[width=3.6in, height=2.0in]{fig3.jpg}
-\caption{Accuracy of deep RNN-based traffic analyzation scheme}
+\caption{Confutsion Matrix}
 \label{fig3}
 }
 \end{figure}
 
-\subsection{LSTM model evaluation for each application}
-By using confusion matrix, we also compare the performance of DR-TAS for each application.
-The Confusion matrix is ​​the most widely used method for representing binary classification evaluation results.
-The Confusion matrix shows how well the deep-running model is categorized for each application.
-Figure x shows the Confusion Matrix, where the rows represent the negative class and the positive class, and the columns represent the predicted by negative and the predicted by positive.
-For example, TN (True Negative) refers to the case where the prediction result of the model is a negative class, which is actually a negative class.
-FP (False Positive) means that the model is predicted as a positive class, but actually it is a negative class.
-FN (False Negative) indicates that the model is predicted as a negative class, but the actual result indicates a positive class, and TP (True Positive) indicates a case where both the predicted result and the actual result are positive.
-
 We calculate precision, recall and f1-score based on Confusion Matrix.
-The precision means the percentage of actual positive predictions out of the positive predicted class, and the
+The precision means the ratio of actual positive predictions out of the positive predicted class, and the
 equation of precision is as follows.
 
 \begin{equation}
 precision = \frac{TP}{TP + FP}
 \end{equation}
-The recall is called the positive detection rate, and it means the percentage of the total positive class predicted by a positive class, and and the equation of recall is as follows.
+The recall is called the positive detection rate, and it means the ratio of the total positive class predicted by a positive class, and and the equation of recall is as follows.
 
 \begin{equation}
 recall = \frac{TP}{TP + FN}
@@ -300,21 +285,41 @@ f1-score = \frac{2 \times precision \times recall}{precision + recall}
 \end{equation}
 The recall and precision are in conflict, and the f1-score is an index that shows the accuracy at once by integrating precision and recall.
 
-Fig. \ref{fig4} and \ref{fig5} show the accuracy and the f1-score of DR-TAS for five applications, respectively.
-As shown in Fig. \ref{fig4}, the accuracy of each application increases as the number of packets per flow increases.
-Also in the case of f1-score, it can be seen that the value increases as the number of packets per flow.
-Is is noted that, in the case of $Web$ and $Bittorrent$, the accuracy and the f1-score are not high particularly when
-the
-number of packets per flow are 10. ....
-
+\subsection{The overall f1-score of DR-TAS}
+For five applications, we examine the overall accuracy of the DR-TAS with regard to various numbers of packets per flow and payload size of each packet, and the results are shown in Fig. \ref{fig4}.
+As shown in the figure, the more the number of packets per flow, the higher the accuracy, and the accuracy becomes high as the payload size increases.
+If particular, when the number of packets per flow is 100 and the payload size is 160, the overall
+f1-score is the highest (i.e., $0.996$). The lowest f1-score is $0.902$ when the corresponding values are 10 and 40, respectively.
 \begin{figure}[!t]
 \centering
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{0pt}
 {
 \includegraphics[width=3.6in, height=2.0in]{fig4.jpg}
-\caption{Accuracy of DR-TAS for each target application}
+\caption{Accuracy of deep RNN-based traffic analyzation scheme}
 \label{fig4}
+}
+\end{figure}
+
+\subsection{LSTM model evaluation for each application}
+Fig. \ref{fig5} and \ref{fig6} show the accuracy and the f1-score of DR-TAS for five applications, respectively.
+As shown in Fig. \ref{fig5}, the accuracy of each application increases as the number of packets per flow increases.
+Also in the case of f1-score, it can be seen that the value increases as the number of packets per flow.
+It is noted that, in the case of {\it Web} and {\it Bittorrent}, the accuracy and the f1-score are not high particularly when
+the number of packets per flow are 10 and payload size is 40.
+When the {\it Web} is classified using DR-TAS, the lowest accuracy is $88.97\%$ and the f1-score is 0.9.
+In case of {\it bittorrent}, the accuracy is $95.65\%$ and the f1-score is 0.83.
+However, if the number of packets per flow and the payload size increase
+The accuracy of the LSTM model for {\it web} and {\it Bittorrent} is $99.81\%$ and $99.82\%$, respectively, and the f1-score is 1 and 0.99.
+
+\begin{figure}[!t]
+\centering
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{0pt}
+{
+\includegraphics[width=3.6in, height=2.0in]{fig5.jpg}
+\caption{Accuracy of DR-TAS for each target application}
+\label{fig5}
 }
 \end{figure}
 
@@ -323,9 +328,9 @@ number of packets per flow are 10. ....
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{0pt}
 {
-\includegraphics[width=3.6in, height=2.0in]{fig5.png}
+\includegraphics[width=3.6in, height=2.0in]{fig6.jpg}
 \caption{f1-score of DR-TAS for each target application}
-\label{fig5}
+\label{fig6}
 }
 \end{figure}
 
@@ -338,35 +343,12 @@ We compare the accuracy of each application with regard to four sets of applicat
     Set~IV&=&\{RDP, Skype, SSH, Bittorrent, Web\}
 \end{eqnarray}
 
-Figure 5 shows the accuracy comparison results for the number of applications of CNN and LSTM.
-Both CNN and LSTM show that accuracy is lowered when Bittorrent and web are added.
-However, the overall accuracy of the LSTM is higher than that of CNN.
-
-\begin{figure}[!t]
-\centering
-\setlength{\abovecaptionskip}{0pt}
-\setlength{\belowcaptionskip}{0pt}
-{
-\includegraphics[width=3.6in, height=2.0in]{fig6.jpg}
-\caption{Comparison on accuray of DR-TAS vs. DC-TAS }
-\label{fig6}
-}
-\end{figure}
-
-\subsection{Comparison of CNN and LSTM elapsed time}
-We compare elapsed time from data preprocessing of CNN and LSTM to result prediction.
-The elapsed time is the sum of the preprocessing time for making the appropriate data for each model and the time taken to input the training data into the CNN and LSTM model.
-Figure 6 shows the elapsed time of CNN and LSTM, and shows the time taken to increase the number of applications as above.
-As the number of applications increases, the elapsed time increases.
-The elapsed time has increased because the amount of data to learn has increased.
-However, it can be seen that the elapsed time of 4 and 5 applications including {\it Bittorrent} and web data increases
-dramatically.
-The reason is that the two application data are larger than RDP, Skype, and ssh, so that the preprocessing process, which makes the data suitable for the model, takes more time.
-In addition, {\it Bittorrent} and {\it Web} are usually composed of image or video data, so the {\it Bittorrent} and {\it Web} data size is larger than the data size of other applications.
-However, in the case of LSTM, the elapsed time is less than half that of CNN as a whole.
-In the case of CNN, one packet is arbitrarily fetched from each application-specific flow in the preprocessing process, so that it takes a long time to read one flow.
-On the other hand, in the case of LSTM, since the flow data are generated for each application, the preprocessing time
-is shorter than that of CNN.
+Fig. \ref{fig7} shows the accuracy comparison results for the number of applications of DC-TAS and DR-TAS.
+Both DC-TAS and DR-TAS show that accuracy is lowered when {\it Bittorrent} and {\it web} are added.
+Because, the number of applications to classify has increased, and the amount of data to train has also increased.
+However, the overall accuracy of the DR-TAS is higher than that of DC-TAS.
+That is, the classification of the flow unit has better results than the packet unit classification.
+In other words, the classification of flow units represents the sequential feature of network traffic.
 
 \begin{figure}[!t]
 \centering
@@ -374,8 +356,34 @@ is shorter than that of CNN.
 \setlength{\belowcaptionskip}{0pt}
 {
 \includegraphics[width=3.6in, height=2.0in]{fig7.jpg}
+\caption{Comparison on accuray of DR-TAS vs. DC-TAS }
+\label{fig7}
+}
+\end{figure}
+
+\subsection{Comparison of DC-TAS and DR-TAS elapsed time}
+We compare elapsed time from data preprocessing of DC-TAS and DR-TAS to result prediction.
+The elapsed time is the sum of the preprocessing time for generating the appropriate data for each model and the time taken to train the CNN and LSTM model.
+Fig. \ref{fig8} shows the elapsed time taken in the experiment of section E.
+As the number of applications increases, the elapsed time increases.
+The elapsed time has increased because the amount of data to train has increased.
+However, it can be seen that the elapsed time of 4 and 5 applications including {\it Bittorrent} and {\it Web} application increases
+dramatically.
+The reason is that {\it Bittorrent} and {\it Web} are usually composed of image or video data, so the {\it Bittorrent} and {\it Web} data size is larger
+So, the two application data are larger than RDP, Skype, and ssh, so that the preprocessing, which makes the data suitable for the model, takes more time.
+
+It is noted that, in the case of LSTM, the elapsed time is less than half that of CNN as a whole.
+In the case of CNN, elapsed time is long because data preprocessing reads arbitrary packets of each application flow.
+On the other hand, in the case of LSTM, preprocessing time is less than CNN preprocessing because it reads and generates data in each application flow unit.
+
+\begin{figure}[!t]
+\centering
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{0pt}
+{
+\includegraphics[width=3.6in, height=2.0in]{fig8.jpg}
 \caption{Comparison on elapsed time of DR-TAS vs. DC-TAS}
-\label{fig6}
+\label{fig8}
 }
 \end{figure}
 
