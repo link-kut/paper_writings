@@ -1,29 +1,45 @@
 This chapter describes learning models that are used to classify network traffic using deep learning.
-The Deep Learning model used is the Convolution Neural Network (CNN), the Residual Network (ResNet), the Recurrent Neural Network (RNN), the Long Short-Term Memory LSTM) and the Convolution and Recurrent Neural Network (CNN + RNN). The Deep Learning model was supported by Keras, and the ResNet and CNN + RNN models were generated using Keras' CNN and RNN models simultaneously.
+The Deep Learning model used is the Convolution Neural Network (CNN), the Residual Network (ResNet), the Recurrent Neural Network (RNN), the Long Short-Term Memory LSTM) and the Convolution and Recurrent Neural Network (CNN + RNN).
+The Deep Learning model was supported by Keras, and the ResNet and CNN + RNN models were generated using Keras' CNN and RNN models simultaneously.
 
 CNN and ResNet models are commonly used for information extraction, sentence classification, face recognition, and image classification.
 CNN is a structure that extracts characteristics of data and grasps patterns of features.
 In the case of RNN and LSTM, it is a model specialized for repetitive and sequential data learning.
 Therefore, the previous learning data is reflected in the current learning using the circulation structure.
 It is generally used for the composition of speech, wave and text.
-
-Therefore, in the case of CNN and ResNet, it is used to classify using imaged packet unit data generated through preprocessing.
-RNN, LSTM, and CNN + RNN models are used to classify sequential data, so they are used to classify learning data in flow units that contain sequential information of network traffic.
+Therefore, in the case of CNN and ResNet, it is used to classify using imaged packet unit data generated through preprocessing. RNN, LSTM, and CNN + RNN models are used to classify sequential data, so they are used to classify learning data in flow units that contain sequential information of network traffic.
 
 \subsection{Convolution Neural Network Architecture}\label
 A CNN model among the deep learning models for classifying network traffic will be described.
 The model architecutre of CNN is composed of input layer, Convolution layer, and Pooling layer and Fully connected layer.
-The input layer uses the payload and label of the packet converted into learning data.
-Packets are used as input data in the input layer in the form of N × N (N = 6, 8, 16, 32) like images.
+The input layer uses the payload and label of the packet converted into learning data. Packets are used as input data in the input layer in the form of $N \times N$ (N = 6, 8, 16, 32) like images.
 Then, the feature of each packet data is convolved through the kernel of two Convolution layer, and output is generated through filter and activation process.
 In the pooling layer, it is the process of reducing the size of the output through the convolution process.
 It simply reduces the size of the data, cancels noise, and provides consistent features in fine detail.
 Finally, the Fully connected layer extracts the prediction value according to the last 8 classes by activation.
 
-Figure 3 is CNN architecture.
+Fig. \ref{fig3} is CNN architecture
+
+\begin{figure}[t]
+\centering
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{0pt}
+{
+\includegraphics[width=3.6in]{fig3.jpg}
+\caption{2-Layer Convolution Neural Network Learning Model}
+\label{fig3}
+}
+\end{figure}
 
 \subsection{Residual Network Architecture}\label
-efefefef
+Unlike traditional CNN, ResNet [] has a unique concept called shortcut connection.
+A shortcut connection is added to the existing CNN model structure, and this shortcut is directly connected without any other parameters.
+A shortcut connection is a type of adding a new type of network to an input value so that learning can be performed.
+Therefore, the newly added network can achieve better performance while maintaining the performance of the existing learned network as much as possible.
+
+In terms of computation, there is nothing more than adding a compute operation.
+Deep networks can be easily optimized through shortcut connections and can improve accuracy as depth increases.
+
 
 \subsection{Recurrent Neural Network Architecture}\label
 RNN is a network architecture that can accept inputs and outputs regardless of input data length, and can be implemented variously and flexibly as needed.

@@ -1,0 +1,130 @@
+The CNN, RNN and LSTM models provided by Keras each have various hyper-parameters.
+Therefore, the performance of the model can be greatly changed by using certain hyper-parameters.
+In addition, the performance of the model may vary depending on the characteristics of the training datasets.
+To do this, we use GridSearchCV, which is provided by Scikit-Learn, as a method of finding hyper-parameters optimized for each deep learning model according to the datasets.
+The GridSearch method looks for the best hyper-parameter for a dataset by trying every possible combination of hyper-parameters based on the dataset.
+GridsearchCV verifies the validity of the model by performing cross-validation in addition to finding the optimal hyper-parameters.
+Cross-validation is a method of dividing specific data into training-only data and test-specific data, then using training data to learn, and testing with test data to verify the validity of the learning.
+In this model tuning, we set the value of CV to 5 to find the optimal hyper-parameters and verify the validity of the model and hyper-parameters at the same time.
+
+\subsection{CNN and ResNet Model Tuning}\label
+The learning data set of CNN and ResNet consists of packet unit data.
+For each of the 8 applications, 10,000 packets were randomly organized into a single learning data set and the payload sizes of each packet were matched.
+The payload size was divided by 36 (6 * 6), 64 (8 * 8), 256 (16 * 16), and 1024 (32 * 32) to increase the size of the dataset.
+Therefore, the shape of the total training datasets is (80000, 6, 6, 1), (80000, 8, 8, 1), (80000, 16, 16, 1), (80000, 32, 32, 1).
+
+There are a total of 15 hyper-parameters used in the CNN model provided by Keras.
+Four of CNN hyper-parameters were selected.
+{\it filter} represents the size of the output through one convolution layer, {\it kernel size} represents the size of the kernel used in the {\it filter}, {\it kernel initializer} represents the parameters for initializing the weight vectors of each layer, and {\it padding} represents the output of the Convolution layer.
+It is necessary to fill in the pixel value specified by the outer angle of the input data with a specific value.
+We perform GridSearch by adding {\it activation}, {\it optimizer}, and {\it batch size} which affects the whole learning in addition to the hyper-parameters to CNN.
+
+Table 1 and 2 shows the values of the gridsearch performed for the selected hyper-parameter.
+\begin{table}
+\caption{CNN hyper-parameter values}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|p{50pt}|p{35pt}|p{35pt}|p{47pt}|p{48pt}|}
+\hline
+ & $6 \times 6 (36)$ & $8 \times 8 (64)$ & $16 \times 16 (256)$ & $32 \times 32 (1024)$ \\
+\hline
+\hline
+filter & 18 & 32 & 256 & 512 \\
+\hline
+kernel size & $3 \times 3$ & $5 \times 5$ & $5 \times 5$ & $3 \times 3$ \\
+\hline
+kernel initializer & glorot uniform & uniform & uniform & uniform  \\
+\hline
+padding & same & same & same & same  \\
+\hline
+activation & softmax & softmax & softmax & softmax \\
+\hline
+optimizer & adam & adam & adam & adam \\
+\hline
+batch size & 100 & 100 & 10 & 10 \\
+\hline
+\end{tabular}
+\label{tab1}
+\end{table}
+
+\begin{table}
+\caption{ResNet hyper-parameter values}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|p{50pt}|p{35pt}|p{35pt}|p{47pt}|p{48pt}|}
+\hline
+ & $6 \times 6 (36)$ & $8 \times 8 (64)$ & $16 \times 16 (256)$ & $32 \times 32 (1024)$ \\
+\hline
+\hline
+filter & 18 & 32 & 256 & 512 \\
+\hline
+kernel size & $3 \times 3$ & $7 \times 7$ & $5 \times 5$ & $7 \times 7$ \\
+\hline
+kernel initializer & glorot uniform & glorot uniform & uniform & glorot uniform  \\
+\hline
+padding & same & same & same & same  \\
+\hline
+activation & softmax & softmax & softmax & softmax \\
+\hline
+optimizer & adam & adam & adam & rmsprop \\
+\hline
+batch size & 100 & 100 & 100 & 100 \\
+\hline
+\end{tabular}
+\label{tab2}
+\end{table}
+
+\subsection{RNN and LSTM Model Tuning}\label
+The training datasets of SimpleRNN and LSTM is data of flow unit.
+The training data set was constructed by arbitrarily fetching 2000 flows from 8 applications.
+In addition, the payload size of each flow unit packets has 36, 64, 256, and 1024, as packet data unit.
+The training data set of the flow unit is a data set that collects sequentially generated packets within the same 5-tuple and within 3600 hours.
+The input data of the RNN must match the number of packets included in the flow.
+Therefore, the number of packets per flow is set to 30, 60, and 100.
+The final shape of the training data set is (16000, 30, 36), (16000, 30, 64), (16000, 30, 256) 16, 100, 256, 16000, 100, 36, 16000, 100, 64, 16000, 1024).
+
+Keras The hyper-parameters used in RNN and LSTM models are 20 and the hyper-parameters of RNN and LSTM are the same.
+We selected dual {\it units}, {\it kernel initializer}, {\it recurrent initializer}, and {\it dropout}.
+{\it Units} represents the space of the output dimension, {\it kernel initializer} initializes the weight vector values of RNN and LSTM, {\it recurrent initializer} initializes the weight vector of recurrent state, {\it dropout} is a number between 0 and 1 It is a variable that deletes by the percentage of the number arbitrarily set in the number of units.
+Like CNN, we perform GridSearch by adding {\it activation}, {\it optimizer}, and {\it batch size}.
+
+Table 3 and 4 shows the values of variables that perform gridsearch for the selected hyper-parameter units, {\it kernel initailizer}, {\it recurrent initializer}, {\it dropout}, {\it activation}, {\it optimizer}, {\it batch size}.
+
+%\begin{table}
+%\caption{RNN hyper-parameter values}
+%\setlength{\tabcolsep}{3pt}
+%\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+%\hline
+% & \multicolumn{3}{$6 \times 6 (36)$} & \multicolumn{3}{$8 \times 8 (64)$} & \multicolumn{3}{$16 \times 16 (256)$} & \multicolumn{3}{$32 \times 32 (1024)$} \\
+%\hline
+% & 30 & 60 & 100 & 30 & 60 & 100 & 30 & 60 & 100 & 30 & 60 & 100 \\
+%\hline
+%\hline
+%units & 128 & 128 & 64 & 256 & 128 & 64 & 256 & 128 & 128 & 128 & 128 & 64 \\
+%\end{tabular}
+%\label{tab3}
+%\end{table}
+%
+%\begin{table}
+%\caption{LSTM hyper-parameter values}
+%\setlength{\tabcolsep}{3pt}
+%\begin{tabular}{|p{50pt}|p{35pt}|p{35pt}|p{47pt}|p{48pt}|}
+%\hline
+% & $6 \times 6 (36)$ & $8 \times 8 (64)$ & $16 \times 16 (256)$ & $32 \times 32 (1024)$ \\
+%\hline
+%\hline
+%filter & 18 & 32 & 256 & 512 \\
+%\hline
+%kernel size & $3 \times 3$ & $7 \times 7$ & $5 \times 5$ & $7 \times 7$ \\
+%\hline
+%kernel initializer & glorot uniform & glorot uniform & uniform & glorot uniform  \\
+%\hline
+%padding & same & same & same & same  \\
+%\hline
+%activation & softmax & softmax & softmax & softmax \\
+%\hline
+%optimizer & adam & adam & adam & rmsprop \\
+%\hline
+%batch size & 100 & 100 & 100 & 100 \\
+%\hline
+%\end{tabular}
+%\label{tab4}
+%\end{table}

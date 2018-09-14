@@ -113,12 +113,12 @@
 % *** GRAPHICS RELATED PACKAGES ***
 %
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+   \usepackage[pdftex]{graphicx}
+   \graphicspath{{../pdf/}{../jpeg/}}
+   \DeclareGraphicsExtensions{.pdf,.jpeg,.png,.jpg}
+   \usepackage[utf8]{inputenc}
+%   \usepackage{assymb, amsmath, amsthm}
+
 \else
   % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
   % will default to the driver specified in the system graphics.cfg if no
@@ -343,7 +343,6 @@
 % (Unless specifically asked to do so by the journal or conference you plan
 % to submit to, of course. )
 
-
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
@@ -412,12 +411,18 @@ Corresponding author: M. Shell (email: http://www.michaelshell.org/contact.html)
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-The abstract goes here.
+Recently, with the advent of various applications, a huge amount of network traffic is generated on the network.
+Because of this, it has a big influence on the IoT network which has to provide fast service.
+Accordingly, the network operator must provide the Quality of Service according to the service provided by each application.
+To do this, research should be done on how to classify various types of application network traffic accurately and how to handle high-capacity traffic generated on high-speed links.
+Also, in order to automatically respond to real-time applications, it is necessary to classify traffic using deep learning without network operator intervention.
+In this paper, we generate training data set of packet unit and flow unit through our own network traffic preprocessing and we have 5 Deep Learning Models (Convolution Neural Network, Residual Network, Recurrent Neural Network, Long Short-Term Memory CNN+RNN) to perform network traffic classification.
+Finally, we analyze the network traffic classification performance of packet unit and flow unit through f1-score using five deep learning models and demonstrate its effectiveness.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Packet Classification, Deep Learning, CNN, RNN
+Packet Classification, Deep Learning, CNN, RNN, ResNet, LSTM, Model Tuning
 \end{IEEEkeywords}}
 
 
@@ -455,43 +460,8 @@ Packet Classification, Deep Learning, CNN, RNN
 
 
 
-\section{Introduction}
-% The very first letter is a 2 line initial drop letter followed
-% by the rest of the first word in caps.
-% 
-% form to use if the first word consists of a single letter:
-% \IEEEPARstart{A}{demo} file is ....
-% 
-% form to use if you need the single drop letter followed by
-% normal text (unknown if ever used by the IEEE):
-% \IEEEPARstart{A}{}demo file is ....
-% 
-% Some journals put the first two words in caps:
-% \IEEEPARstart{T}{his demo} file is ....
-% 
-% Here we have the typical use of a "T" for an initial drop letter
-% and "HIS" in caps to complete the first word.
-\IEEEPARstart{T}{his} demo file is intended to serve as a ``starter file''
-for IEEE \textsc{Transactions on Magnetics} journal papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
-Next subsection will mention xxxxxx \ref{subsec:classifyPacketsUsingDeepLearning}
-
-\hfill mds
- 
-\hfill August 26, 2015
-
-\subsection{Subsection Heading Here}
-Subsection text here.
-
-% needed in second column of first page if using \IEEEpubid
-%\IEEEpubidadjcol
-
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
-
+\section{Introduction}\label{sec:introduction}
+\input{introduction}
 
 \section{Related Work}\label{sec:relatedWork}
 \input{related-Work}
@@ -502,11 +472,14 @@ Subsubsection text here.
 \section{Deep Learning Models}\label{sec:deeplearningmodels}
 \input{deep-learning-models}
 
-\section{Model Tunning}\label{sec:modeltunning}
-\input{model_tunning}
+\section{Model Tuning}\label{sec:modeltunning}
+\input{model-tunning}
+
+\section{Experiments Evaluation}\label{sec:evaluation}
+\input{evaluation}
 
 \section{Conclusion}
-The conclusion goes here.
+\input{evaluation}
 
 
 
