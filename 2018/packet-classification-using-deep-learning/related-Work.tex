@@ -38,4 +38,15 @@ M. Lopez-Martin et al. used packet classification using CNN and RNN combination 
 In both of the above papers, learning was performed on the deep learning model by adding the header information of the packet to the dataset. In such a case, the classification accuracy may be high because the header information can be certain information that characterizes the data to some extent. Therefore, in this paper, we will perform learning only with payload data of application layer except for header information of the packet.
 
 \subsection{Payload-based Traffic Classification}\label{subsec:payloadbased}
-efefefef
+Payload-based traffic classification is a replacement for rule-based and port-based traffic classification.
+However, because it retrieves the payload for known application features, higher computation and resource costs are incurred.
+It can also be difficult to maintain and manage the growing number of application features.
+In addition, as security and privacy issues increase, payloads are often encrypted and prohibited by privacy laws.
+Therefore, it is not easy to deduce the signature for an application class using a payload.
+
+Haffner et al. [] reduced the amount of computation that occurs when generating payload-based datasets.
+To reduce the amount of computation, they used only the first few bytes of unidirectional traffic data and unencrypted TCP data.
+They use NB, AdaBoost, and MaxEnt for traffic classification.
+AdaBoost outperforms NB and MaxEnt and yields an overall precision of $99\%$ with an error rate within $0.5\%$.
+
+Despite, payload-based classification methods are used to provide high accuracy and establish ground truths.
