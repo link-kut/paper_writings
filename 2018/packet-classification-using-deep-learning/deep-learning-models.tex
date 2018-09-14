@@ -6,12 +6,12 @@ CNN and ResNet models are commonly used for information extraction, sentence cla
 CNN is a structure that extracts characteristics of data and grasps patterns of features.
 In the case of RNN and LSTM, it is a model specialized for repetitive and sequential data learning.
 Therefore, the previous learning data is reflected in the current learning using the circulation structure.
-It is generally used for the composition of speech, wave and text.
+It is generally used for the composition of speech, wave, and text.
 Therefore, in the case of CNN and ResNet, it is used to classify using imaged packet unit data generated through preprocessing. RNN, LSTM, and CNN + RNN models are used to classify sequential data, so they are used to classify learning data in flow units that contain sequential information of network traffic.
 
 \subsection{Convolution Neural Network Architecture}\label
 A CNN model among the deep learning models for classifying network traffic will be described.
-The model architecutre of CNN is composed of input layer, Convolution layer, and Pooling layer and Fully connected layer.
+The model architecture of CNN is composed of the input layer, Convolution layer, and Pooling layer and Fully connected layer.
 The input layer uses the payload and label of the packet converted into learning data. Packets are used as input data in the input layer in the form of $N \times N$ (N = 6, 8, 16, 32) like images.
 Then, the feature of each packet data is convolved through the kernel of two Convolution layer, and output is generated through filter and activation process.
 In the pooling layer, it is the process of reducing the size of the output through the convolution process.
@@ -37,12 +37,11 @@ A shortcut connection is added to the existing CNN model structure, and this sho
 A shortcut connection is a type of adding a new type of network to an input value so that learning can be performed.
 Therefore, the newly added network can achieve better performance while maintaining the performance of the existing learned network as much as possible.
 
-In terms of computation, there is nothing more than adding a compute operation.
+In terms of computation, there is nothing more than adding an operation.
 Deep networks can be easily optimized through shortcut connections and can improve accuracy as depth increases.
 
-
 \subsection{Recurrent Neural Network Architecture}\label
-RNN is a network architecture that can accept inputs and outputs regardless of input data length, and can be implemented variously and flexibly as needed.
+RNN is a network architecture that can accept inputs and outputs regardless of input data length and can be implemented variously and flexible as needed.
 Therefore, the architecture of RNN used in this paper is composed of multi-layer as shown in figure 4.
 In the RNN, the number of packets per flow (30, 60 and 100) is received at the input layer in order to learn flow unit data.
 The number of units to be set is then output to the number of applications learned in the output layer through the RNN cell.
@@ -52,12 +51,22 @@ In addition to the existing RNN model, LSTM determines whether to keep the weigh
 Through this, we solve the phenomenon that the weight value is not maintained as the distance between information and information of one input data in the existing RNN becomes longer, and the learning ability decreases.
 LSTM is more persistent than existing RNN because it keeps updating the past data.
 The cell state is responsible for adding or deleting information.
-The structure of the LSTM model is configured as shown in figure 5.
-It is a single layer different from RNN.
+The structure of the LSTM model is configured as shown in Fig.\ref{fig4}.
+
+\begin{figure}[t]
+\centering
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{0pt}
+{
+\includegraphics[width=3.6in]{fig4.jpg}
+\caption{2-Layer Convolution Neural Network Learning Model}
+\label{fig4}
+}
+\end{figure}
 
 The advantage of LSTM is that each memory control is possible and the result can be controlled.
 However, there is a possibility that the memory may be overwritten, and the operation speed is slower than that of the conventional RNN.
-Therefore, it is composed of single layer different from existing RNN model.
+Therefore, it is composed of two layers different from existing RNN model.
 
 \subsection{CNN + RNN Architecture}\label
 efefefef

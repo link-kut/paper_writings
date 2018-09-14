@@ -1,7 +1,7 @@
-In this section, we compare packet-based application prediction and flow-unit application prediction.
+In this section, we compare packet-based application prediction and flow unit application prediction.
 CNN and ResNet are used for packet unit prediction.
 RNN and LSTM are used for flow unit prediction.
-In addition, we compare the performance of the model with the flow unit and the packet unit through the overall comparison of CNN, ResNet, RNN and LSTM.
+In addition, we compare the performance of the model with the flow unit and the packet unit through the overall comparison of CNN, ResNet, RNN, and LSTM.
 
 \subsection{Experiments Environment}
 The learning model is based on CNN, RNN, and LSTM supported by Keras 2.2.0.
@@ -16,18 +16,18 @@ The experiment performs Scikit-learn's GridSearchCV for one dataset and finds th
 The model learning was performed using optimal hyper-parameters for each dataset in Tables 1, 2, 3 and 4 of the Section.\ref{sec:modeltunning}.
 
 \subsection{Performance Metrics}
-In this paper, we use accuracy, precision, recall and f1-score for performance comparison of CNN, ResNet, RNN and LSTM models.
+In this paper, we use accuracy, precision, recall, and f1-score for performance comparison of CNN, ResNet, RNN and LSTM models.
 Accuracy, recall, precision, and f1-score provide performance metrics that take into account the unbalanced distribution of each application.
 f1-score is the most important metric in all metrics.
-f1-score represents the harmonic mean of precision and recall, and represents the classification performance of an unbalanced datasets.
+f1-score represents the harmonic mean of precision and recall and represents the classification performance of unbalanced datasets.
 The f1-score is expressed as 0 to 1 and is the best value at 1.
 
-The definition of accuracy, precision, recall and f1-score follows four previous definitions as follow:
+The definition of accuracy, precision, recall, and f1-score follows four previous definitions as follow:
 First, False Positive (FP) indicates that the prediction is that the application is correct, but not actually the application.
 Second, False Negative (FN) indicates that the application is not expecting the result, but the application is actually correct.
 Third, True Positive (TP) indicates that the application is correct and the application is correct.
 Finally, True Negative (TN) indicates that the application is not the result of the prediction, but is not actually the application.
-The definition of accuracy, precision, recall and f1-score according to the previous definition is as follows:
+The definition of accuracy, precision, recall, and f1-score according to the previous definition is as follows:
 
 \begin{equation}
 Accuracy =  \frac{TP + TN}{TP + TN + FP + FN}
@@ -78,7 +78,7 @@ The following experiment is a comparison of RNN, LSTM, and CNN + RNN using flow 
 Fig.\ref{fig9} shows the total f1-score for each packet's payload size and the number of packets per flow.
 It can be seen that the overall f1-score increases as the payload size of the packet increases.
 Also, as the number of packets per flow increases, the entire f1-score increases.
-When the number of packets per flow is 30 and the payload size is 36, the f1-score of each RNN, LSTM and CNN + RNN is 0.885, 0.89375 and 0.89.
+When the number of packets per flow is 30 and the payload size is 36, the f1-score of each RNN, LSTM, and CNN + RNN is 0.885, 0.89375 and 0.89.
 However, when the number of packets per flow is 100 and the payload size is 1024, each f1-score thereof is 0.972, 0.99575 and 0.9925.
 It is noticed that the f1-score across LSTM is higher than the total F1-score RNN and CNN + RNN.
 It indicates that LSTM alone can provide similar or better performance without using complex models in the flow unit learning model.
@@ -99,4 +99,4 @@ Packet unit learning models CNN and ResNet show that f1-score on Facebook and Wi
 The facebook and wikipedia packets are very similar to each other, so they are smaller than the f1-score of other applications' packets.
 In the case of RNN, we can see that f1-score value of Facebook and Wikipedia are low as in the case of packet unit classification.
 However, in the case of LSTM and CNN + RNN, the f1-score of both applications is high.
-Thus, we can see that the LSTM and CNN + RNN learning models are well-categorized, and that the LSTM performs better with subtle differences.
+Thus, we can see that the LSTM and CNN + RNN learning models are well-categorized and that the LSTM performs better with subtle differences.

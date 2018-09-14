@@ -1,6 +1,6 @@
-In this section, the dataset used to perform the traffic classification is introduced to preprocess the PCAP file provided by Broadband Communication Research Group [] for the deep learning learning.
-A PCAP (Packet Capture) file captures and stores network packets using programs such as wireshark and TCPdump.
-Therefore, in this paper, traffic dataset provided by Broadband Communication Research Group is divided into flow unit and packet unit, and preprocessing packet is used as learning data.
+In this section, the dataset used to perform the traffic classification is introduced to preprocess the PCAP file provided by Broadband Communication Research Group [] for the deep learning.
+A PCAP (Packet Capture) file captures and stores network packets using programs such as Wireshark and TCPdump.
+Therefore, in this paper, traffic dataset provided by Broadband Communication Research Group is divided into flow unit and packet unit, and the preprocessing packet is used as learning data.
 
 \subsection{Data Split}\label
 The size of the original PCAP file provided is about 59 GB, and there are a total of 769,507 flows in the file.
@@ -21,15 +21,15 @@ Because of the labeling file, accurate label information corresponding to the gr
 \end{figure}
 
 For the preprocessing of the supplied data, 8 kinds of application were selected based on the number of flows.
-The 8 applications selected the application that has traffic of the actual network and the number of flow is more than 2000.
-The 8 most common Label names are the Remote Desktop Protocol (RDP), Skype, SSH, Bittorrent, HTTP-Facebook, HTTP-Google, HTTP-Wikipedia and HTTP-Yahoo.
+The 8 applications selected the application that has the traffic of the actual network and the number of flow is more than 2000.
+The 8 most common Label names are the Remote Desktop Protocol (RDP), Skype, SSH, BitTorrent, HTTP-Facebook, HTTP-Google, HTTP-Wikipedia, and HTTP-Yahoo.
 The application layer payload of the selected flow internal packet is filtered and extracted, and 8 application layer payload data files are generated using the extracted payload data.
 
 \subsection{Learning Data Generation}\label
-The process of converting the application layer payload data file created in the above section into input data suitable for deep learning learning will be described.
+The process of converting the application layer payload data file created in the above section into input data suitable for deep learning will be described.
 The application payload data file is divided into per packet unit and per flow unit, and each learning data is generated.
 Flow is the same as the 5-tuple of the packet's header information, and packets generated within 3600 seconds of the previous packet are bundled into the same flow.
-  
+
 Each packet is extracted from each application layer payload data, and the elements of the payload data of the packet are grouped by 4 bits into one unit of learning data.
 Therefore, one pixel of the learning data represents the number of 0 to 15.
 One packet data collects pixelized data and image data as shown in Fig.\ref{fig2}.
@@ -55,7 +55,7 @@ If the extracted payload size is smaller than the set size, the size is adjusted
 
 The learning data of the flow unit is arbitrarily selected for each application in the application layer payload data file.
 The selected flow fetches the packets from the first N packets as the number of packets (N) per predetermined flow.
-They are  packets that has undergone a preprocessing process as in the learning data of each packet unit.
+They are packets that have undergone a preprocessing process as in the learning data of each packet unit.
 The learning data of the flow unit extracts 2000 flows for each application from the application layer payload data file and has a total of 16000 flows.
 The number of N is set to 30, 60, and 100, and packets of each flow are fetched by the corresponding number to generate learning data.
 

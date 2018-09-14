@@ -9,7 +9,7 @@ Thus, according to each service, the network operator tries to provide smooth Qu
 Research on how to classify network traffic in order to provide smooth services according to application programs is actively being conducted.
 There are various ways to classify network traffic, such as rule-based, port-based, flow-correlation-based, payload-based and using deep-learning.
 In general, rule-based and port-based network traffic classification methods are widely used.
-However, rule-based and port-based network traffic classification methods are classified by well-known application port numbers or specific rules, but are not well classified for unknown applications because they do not know the port number or specific rules.
+However, rule-based and port-based network traffic classification methods are classified by well-known application port numbers or specific rules but are not well classified for unknown applications because they do not know the port number or specific rules.
 Also, a network operator has the inconvenience of manually adding a rule or port number in order to provide a new network service.
 
 The payload-based network classification method classifies only the pure application layer payload information excluding the packet header information of the entire network traffic.
@@ -21,7 +21,7 @@ However, there is a practical problem due to the difficulty of accessing the pay
 
 Recently, researches on the field of deep learning have progressed actively and have become applicable to various fields.
 So, there is much research on network traffic classification using deep learning.
-In the network traffic classification study using the existing deep learning learning model, classification is performed using the header information of the packet as a feature.
+In the network traffic classification study using the existing deep learning model, classification is performed using the header information of the packet as a feature.
 Therefore, there is a limitation because the classification is performed within a local network.
 In a real network that is outside the local limits, it is difficult to classify through the previously learned model.
 
@@ -37,8 +37,8 @@ To enhance the performance of network traffic classification, we added a model t
 Then, we compare the packet unit and the flow unit datasets by using five different deep learning models.
 
 The remainder of this paper is organized as follows.
-Section II describes related work and introduces motivation of our work.
+Section II describes related work and introduces motivation for our work.
 Section III describes the deep learning models architecture for network traffic classification.
-Section IV presents model tuning method for optimal hyper-parameter.
+Section IV presents the model tuning method for optimal hyper-parameter.
 Section V shows experiment results and analysis.
 Section VI provides concluding remarks.
