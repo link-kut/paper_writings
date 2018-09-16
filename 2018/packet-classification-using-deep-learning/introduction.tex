@@ -4,15 +4,15 @@ Therefore, the network operator needs differentiated services according to appli
 In particular, video and voice services require fast network services.
 On the other hand, services such as text can provide enough services without having a fast transmission speed.
 In addition, Peer-to-Peer (P2P) services such as BitTorrent take up a significant portion of the world's Internet traffic, which has a significant impact on overall network speed.
-Thus, according to each service, the network operator tries to provide smooth Quality of Service (QoS) by placing different priority.
+Thus, according to each service, the IoT network operator tries to provide smooth Quality of Service (QoS) by placing different priority.
 
-Research on how to classify network traffic in order to provide smooth services according to application programs is actively being conducted.
+Research on how to classify network traffic \cite{Gupta:2001:APC:2329014.2329458,Boutaba2018,Meidan:2017:PML:3019612.3019878,L6392563} in order to provide smooth services according to application programs is actively being conducted.
 There are various ways to classify network traffic, such as rule-based, port-based, flow-correlation-based, payload-based and using deep-learning.
 In general, rule-based and port-based network traffic classification methods are widely used.
 However, rule-based and port-based network traffic classification methods are classified by well-known application port numbers or specific rules but are not well classified for unknown applications because they do not know the port number or specific rules.
 Also, a network operator has the inconvenience of manually adding a rule or port number in order to provide a new network service.
 
-The payload-based network classification method classifies only the pure application layer payload information excluding the packet header information of the entire network traffic.
+The payload-based \cite{F4534133,Bernaille:2006:EAI:1368436.1368445,Erman:2007:IDW:1242572.1242692} network classification method classifies only the pure application layer payload information excluding the packet header information of the entire network traffic.
 There is a problem with locality dependency when packet classification is performed by adding header information.
 Also, if the header information is changed, classification will not be performed properly.
 But, the payload-based network classification method solves the locality dependency problem because it uses only the payload data, and it is not affected even if the header information is changed.

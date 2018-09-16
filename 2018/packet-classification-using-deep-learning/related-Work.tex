@@ -5,7 +5,7 @@ Packet classification using deep learning is a method of automatically classifyi
 In this chapter, we study the rule-based packet classification research and the packet classification studies that utilized deep learning.
 
 \subsection{Rule-based Packet Classification}\label{subsec:rule-basedPacketClassification}
-Rule-based packet classification is a method of classifying packets entering the network according to predefined rules.
+Rule-based packet classification \cite{Li:2016:CUE:2987443.2987464,T4738466,UDREA2008130} is a method of classifying packets entering the network according to predefined rules.
 The rule-based packet classification method is classified by using the header information of the network packet.
 Therefore, rule-based packet classification is performed based on the source and destination IP and port of the packet header.
 
@@ -14,7 +14,7 @@ Since the packet is classified using the information of the packet header, if th
 In addition, because of rule-based packet classification with IP and port information of packet header, there are local limitations.
 Therefore, when a new network accesses or packets of a new network occur, there is a problem that a new rule must be redefined.
 
-fangfan Li et al. [] At least it was used to lower the dependency of packet header information.
+Fangfan Li et al. \cite{Li:2016:CUE:2987443.2987464} At least it was used to lower the dependency of packet header information.
 Using this approach, they found that our packets having device uses HTTP and TLS-handshake fields in their matching rules, and only for the first packet in each direction.
 If there is similar information in the header information of the incoming packet using the header information found in the first packet, it is classified as the packet of the same type.
 Although the IP and port number of the packet is used less, the method of classifying the subsequent packets by using the header information of the first packet also depends on the header information.
@@ -22,9 +22,9 @@ Although the IP and port number of the packet is used less, the method of classi
 \subsection{Classify Packets Using Deep Learning}\label{subsec:classifyPacketsUsingDeepLearning}
 Several studies using deep learning have been conducted recently.
 Also, researches to utilize machine learning in networks are actively being conducted.
-Accordingly, studies are being actively carried out to perform packet classification using deep learning of network.
+Accordingly, studies are being actively carried out to perform packet classification using deep learning of network \cite{Parsaei2017,Erman:2006:TCU:1162678.1162679,Yu:2018:QTC:3223065.3223318,10.1007:978-3-540-24668-8_21,W7899588,M8026581}.
 
-Wei Wang et al. uses CNN model to classify malware traffic and general traffic.
+Wei Wang et al. \cite{W7899588} uses CNN model to classify malware traffic and general traffic.
 First, if 5-tuple (source IP/port, destination IP/port, protocol) are the same among the packets, one flow is defined as one dataset.
 In addition to the flow dataset, packets are defined as a session set as a dataset.
 The session dataset is a case where 5-Tuple is paired with the same flow and the same source IP/port and Destination IP/port cross each other.
@@ -34,7 +34,7 @@ The flow and session data sets constructed above are composed of 28 * 28 data si
 The constructed dataset is used to learn CNN model to classify malware traffic and general traffic.
 In this paper, the result of classification of malware traffic and general traffic is 100%.
 
-M. Lopez-Martin et al. used packet classification using CNN and RNN combination of deep learning model. The packet data is extracted from the header information and the payload data in the packet using the DPI Tool and used as learning data. The extracted learning data was used as input data to the combined model of CNN and RNN. They showed that CNN and RNN combined better than CNN and RNN models.
+M. Lopez-Martin et al \cite{M8026581}. used packet classification using CNN and RNN combination of deep learning model. The packet data is extracted from the header information and the payload data in the packet using the DPI Tool and used as learning data. The extracted learning data was used as input data to the combined model of CNN and RNN. They showed that CNN and RNN combined better than CNN and RNN models.
 In both of the above papers, learning was performed on the deep learning model by adding the header information of the packet to the dataset. In such a case, the classification accuracy may be high because the header information can be certain information that characterizes the data to some extent. Therefore, in this paper, we will perform learning only with payload data of application layer except for header information of the packet.
 
 \subsection{Payload-based Traffic Classification}\label{subsec:payloadbased}
@@ -44,9 +44,8 @@ It can also be difficult to maintain and manage the growing number of applicatio
 In addition, as security and privacy issues increase, payloads are often encrypted and prohibited by privacy laws.
 Therefore, it is not easy to deduce the signature for an application class using a payload.
 
-Haffner et al. [] reduced the amount of computation that occurs when generating payload-based datasets.
+Haffner et al. \cite{Haffner2005ACASAC} reduced the amount of computation that occurs when generating payload-based datasets.
 To reduce the amount of computation, they used only the first few bytes of unidirectional traffic data and unencrypted TCP data.
 They use NB, AdaBoost, and MaxEnt for traffic classification.
 AdaBoost outperforms NB and MaxEnt and yields an overall precision of $99\%$ with an error rate within $0.5\%$.
-
 Despite, payload-based classification methods are used to provide high accuracy and establish ground truths.

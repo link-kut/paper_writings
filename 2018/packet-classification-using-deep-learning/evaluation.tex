@@ -15,22 +15,18 @@ The experiment performs Scikit-learn's GridSearchCV for one dataset and finds th
 The model learning was performed using optimal hyper-parameters for each dataset in Tables 1, 2, 3 and 4 of the Section.\ref{sec:modeltunning}.
 
 \subsection{Performance Metrics}
-In this paper, we use accuracy, precision, recall, and f1-score for performance comparison of CNN, ResNet, RNN and LSTM models.
-Accuracy, recall, precision, and f1-score provide performance metrics that take into account the unbalanced distribution of each application.
+In this paper, we use precision, recall, and f1-score \cite{citeulike:12882259} for performance comparison of CNN, ResNet, RNN and LSTM models.
+Recall, precision, and f1-score provide performance metrics that take into account the unbalanced distribution of each application.
 f1-score is the most important metric in all metrics.
 f1-score represents the harmonic mean of precision and recall and represents the classification performance of unbalanced datasets.
 The f1-score is expressed as 0 to 1 and is the best value at 1.
 
-The definition of accuracy, precision, recall, and f1-score follows four previous definitions as follow:
+The definition of recall, precision and f1-score follows four previous definitions as follow:
 First, False Positive (FP) indicates that the prediction is that the application is correct, but not actually the application.
 Second, False Negative (FN) indicates that the application is not expecting the result, but the application is actually correct.
 Third, True Positive (TP) indicates that the application is correct and the application is correct.
 Finally, True Negative (TN) indicates that the application is not the result of the prediction, but is not actually the application.
-The definition of accuracy, precision, recall, and f1-score according to the previous definition is as follows:
-
-\begin{equation}
-Accuracy =  \frac{TP + TN}{TP + TN + FP + FN}
-\end{equation}
+The definition of recall, precision and f1-score according to the previous definition is as follows:
 
 \begin{equation}
 Recall =  \frac{TP}{TP + FP}
