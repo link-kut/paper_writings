@@ -28,7 +28,7 @@ In a real network that is outside the local limits, it is difficult to classify 
 In this paper, the datasets of the deep learning model create training datasets from the network traffic through the self-developed data preprocessing.
 Through preprocessing, one packet in network traffic is imaged and generated as training data.
 The imaged packets are gathered for each application and are made up of training datasets of packet unit or flow unit.
-Convolution Neural Network(CNN), Residual Network (ResNet), Recurrent Neural Network (RNN), Long Short-Term Memory (LSTM), and CNN + RNN are learned to classify network traffic using the generated packet unit and flow unit training datasets.
+Convolution Neural Network (CNN), Residual Network (ResNet), Recurrent Neural Network (RNN), Long Short-Term Memory (LSTM), and CNN + RNN are learned to classify network traffic using the generated packet unit and flow unit training datasets.
 CNN and ResNet models are suitable for classification of image data, they are used for learning imaged datasets of packet unit.
 The RNN, LSTM, and CNN + RNN learning models are suitable for learning sequential datasets.
 Therefore, They are used to learn flow unit datasets that contain time sequential of network traffic.

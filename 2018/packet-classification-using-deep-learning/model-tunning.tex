@@ -1,5 +1,5 @@
-The CNN, RNN and LSTM models provided by Keras each have various hyper-parameters.
-Therefore, the performance of the model can be greatly changed by using certain hyper-parameters.
+Each of CNN, RNN and LSTM models has various hyper-parameters which determines the network structure (e.g., number of filters) and how the network models are trained (e.g., type of optimizer).
+The performance of the model can be greatly diverse according to the selected set of hyper-parameters.
 In addition, the performance of the model may vary depending on the characteristics of the training datasets.
 To do this, we use GridSearchCV, which is provided by Scikit-Learn, as a method of finding hyper-parameters optimized for each deep learning model according to the datasets.
 The GridSearch method looks for the best hyper-parameter for a dataset by trying every possible combination of hyper-parameters based on the dataset.
@@ -21,7 +21,7 @@ We perform GridSearch by adding {\it activation}, {\it optimizer}, and {\it batc
 
 Table 1 and 2 shows the values of the gridsearch performed for the selected hyper-parameter.
 \begin{table}
-\caption{CNN hyper-parameter values}
+\caption{The optimal CNN hyper-parameter values found by our grid-search}
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{|p{50pt}|p{35pt}|p{35pt}|p{47pt}|p{48pt}|}
 \hline
@@ -47,7 +47,7 @@ batch size & 100 & 100 & 10 & 10 \\
 \end{table}
 
 \begin{table}
-\caption{ResNet hyper-parameter values}
+\caption{The optimal ResNet hyper-parameter values found by our grid-search}
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{|p{50pt}|p{35pt}|p{35pt}|p{47pt}|p{48pt}|}
 \hline

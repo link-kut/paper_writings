@@ -8,9 +8,8 @@ The learning model is based on CNN, RNN, and LSTM supported by Keras 2.2.0.
 In case of ResNet, network model was constructed using CNN model supported by Keras.
 Model learning epochs were set to 200.
 
-The experiments environment was run on Ubuntu 16.04 LTS, using 32GB of RAM and two NVIDIA GTX 1080Ti 11GB.
-Experiments implementation uses version 1.8 of Tensorflow-gpu and version 2.2.0 of Keras in Python 3.6.
-We were also able to utilize the GPU with CUDA 9.0 and CuDNN version 7.1.2.
+In the experiments environment, we run the models on Ubuntu 16.04 LTS using 32GB of RAM and two GPU cards of which model is NVIDIA GTX 1080Ti 11GB.
+Experiments implementation uses Tensorflow-gpu 1.8 and Keras 2.2.0 operated with Python 3.6.
 
 The experiment performs Scikit-learn's GridSearchCV for one dataset and finds the optimal hyper-parameters through each model tuning.
 The model learning was performed using optimal hyper-parameters for each dataset in Tables 1, 2, 3 and 4 of the Section.\ref{sec:modeltunning}.
