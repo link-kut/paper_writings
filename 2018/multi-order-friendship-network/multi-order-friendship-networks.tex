@@ -53,10 +53,10 @@ In this section, we formally define {\it multi-order egocentric friendship netwo
 \subsection{Definitions}\label{subsec:x-egoDefinition}
 In this paper, we consider a graph $G(V, E)$\footnote{We use the term {\em actors} and {\em social links} to refer to individuals, groups or organizations and their relationships in a social network. On the other hand, the graph representing a social network consists of {\em vertices} and {\em edges} representing actors and social links, respectively.} where $V$ is a set of vertices and $E$ is a set of undirected edges representing social links between vertices.
 In the literature~\cite{egocentric, everett, ICCN:lbcdna, SIMBET}, given a graph $G(V, E)$ and a vertex $v \in V$, the {\em ego network} of $v$ is defined as the subgraph of $G$ consisting of $v$ and its 1-hop neighbors (i.e., vertices with an edge to $v$) as well as the edges between these vertices.
-Using the notation summarized in Table~\ref{table:symbols}, this ego network can be formally extended to \emph{$n$th-order ego network} as follows:
+Using the notation summarized in Table~\ref{table:symbols}, this ego network can be formally extended to \emph{$n$-th order ego network} as follows:
 
 \begin{definition}\label{def:multi-order-ego-network}
-Given a graph $G(V, E)$ and a vertex $v \in V$, the \emph{$n$th-order ego network} of $v$ is defined as $\ENN{v}{n} (\LV{v}{n}, \LE{v}{n})$ where $\LV{v}{n}$ is the set of vertices whose geodesic distance from $v$ is no longer than $n$ and $\LE{v}{n}$ denotes the set of edges between the vertices in $\LV{v}{n}$.
+Given a graph $G(V, E)$ and a vertex $v \in V$, the \emph{$n$-th order ego network} of $v$ is defined as $\ENN{v}{n} (\LV{v}{n}, \LE{v}{n})$ where $\LV{v}{n}$ is the set of vertices whose geodesic distance from $v$ is no longer than $n$ and $\LE{v}{n}$ denotes the set of edges between the vertices in $\LV{v}{n}$.
 \end{definition}
 
 In a given graph shown at Fig.~\ref{fig:1} (a), $\LV{v}{1} = \V{v}{0} \cup \V{v}{1} = \{v, a, b, c, d\}$ and $\LE{v}{1}=\{(v, a), (v, b), (v, c), (v, d), (a, b), (c, d) \}$. The first-order ego network (i.e., just ego network) of vertex $v$, $\ENN{v}{1}(\LV{v}{1}, \LE{v}{1})$, is shown in Fig.~\ref{fig:1} (b).
@@ -64,7 +64,7 @@ Egocentric networks well model the relationships/interactions between an actor a
 However, egocentric networks have the limitation that they do not capture a substantial amount of information if the networks are formed via a way of information diffusion.
 For example, in Fig.~\ref{fig:1} (a), assume that actor $v$ received from actor $a$ the information about $a$'s 1-hop neighbors (i.e., $b$, $e$, $f$, $g$, and $v$).
 Despite this information, the ego network of $v$ cannot record the social links between $a$ and $e$, between $a$ and $f$, and between $a$ and $g$ since it can represent only the social links between $v$ and each 1-hop neighbor of $v$, and between two 1-hop neighbors of $v$.
-On the other hand, $n$th-order egocentric networks can hold more information than egocentric networks.
+On the other hand, $n$-th order egocentric networks can hold more information than egocentric networks.
 For example, the second-order ego network of vertex $v$, $\ENN{v}{2} (\LV{v}{2}, \LE{v}{2})$, is shown in Fig.~\ref{fig:1} (c).
 However, it still does not contain all the linkage information of an ego's first and second-order neighbors.
 For example, $f$, a second-order neighbor of $v$, has its neighbors $j$ and $k$, which does not belong to $\ENN{v}{2} (\LV{v}{2}, \LE{v}{2})$. 
@@ -72,14 +72,14 @@ If there were a way that all the neighbor information of $f$ can be delivered to
 
 Egocentric friendship networks overcome the above limitation. 
 Egocentric friendship network for an actor consists of the alters directly connected to the actor, along with the links between the actor and the alters. 
-We extend the concept of egocentric friendship network into \emph{$n$th-order egocentric friendship network}, also called \emph{$n$th-order f-ego network}, and define it formally as follows:  
+We extend the concept of egocentric friendship network into \emph{$n$-th order egocentric friendship network}, also called \emph{$n$-th order f-ego network}, and define it formally as follows:  
 \begin{definition}\label{def:multi-order-friendship-network}
-Given a graph $G(V, E)$ and a vertex $v \in V$, the \emph{$n$th-order f-ego network} of $v$ is $\FNN{v}{n}(\LV{v}{n}, \LE{v}{n} - \E{v}{n})$, where $\LV{v}{n}$ is the set of vertices that are at most $n$ hops away from $v$, $\LE{v}{n}$ is the set of edges between vertices that are at most $n$ hops away from $v$, and $\E{v}{n}$ is the set of edges between $n$-hop neighbors of $v$.
+Given a graph $G(V, E)$ and a vertex $v \in V$, the \emph{$n$-th order f-ego network} of $v$ is $\FNN{v}{n}(\LV{v}{n}, \LE{v}{n} - \E{v}{n})$, where $\LV{v}{n}$ is the set of vertices that are at most $n$ hops away from $v$, $\LE{v}{n}$ is the set of edges between vertices that are at most $n$ hops away from $v$, and $\E{v}{n}$ is the set of edges between $n$-hop neighbors of $v$.
 \end{definition}
 Fig.~\ref{fig:1} (d) and (e) show the first-order f-ego network and the second-order f-ego network of $v$, respectively. 
 $\ENN{v}{n}$ has the same vertices with $\FNN{v}{n}$, while $\FNN{v}{n}$ is different from $\ENN{v}{n}$ in that $\FNN{v}{n}$ does not contain $\E{v}{n}$. 
 For example, as shown in Fig.~\ref{fig:1} (e), the second-order f-ego network of $v$ does not include the edge sets $\E{v}{2}=\{ (f, e), (h, i) \}$. It is noted that a vertex $v$ can generate its second-order f-ego network by using only neighbor information of its neighbors, along with its first-order f-ego network. 
-As the same manner, for $n=1, 2, ..., n$, the $n$th-order f-ego network of an actor $v$ can be constructed with the first-order neighbor and linkage information of vertices in $V_{n-1} (v)$, along with its $(n-1)$th-order f-ego network. Formally, the $n$th-order f-ego network of a vertex $v$ is defined recursively as follows:
+As the same manner, for $n=1, 2, ..., n$, the $n$-th order f-ego network of an actor $v$ can be constructed with the first-order neighbor and linkage information of vertices in $V_{n-1} (v)$, along with its $(n-1)$th-order f-ego network. Formally, the $n$-th order f-ego network of a vertex $v$ is defined recursively as follows:
 \begin{eqnarray}
 \displaystyle
 \FNN{v}{n} = 
@@ -107,13 +107,13 @@ Given an undirected graph, $\sigma_{st}=\sigma_{ts}$ and $\sigma_{st}(v)=\sigma_
 The globally computed betweenness based on (\ref{bet}) requires much information about the whole network topology and causes large computational overheads. If the whole network were constructed via a way of information diffusion, a kind of information exchange load should be also very heavy. 
 Therefore, getting local information from neighbor nodes and generating multi-order egocentric friendship networks in a distributed way are practically feasible, and calculating betweenness based on such local information is also acceptable if the betweenness is not much different from the one computed based on the global information of the whole network.
  
-A node $v$'s \emph{$n$th-order ego betweenness} $\BE{n}{v}$ on its ego network $\ENN{n}{v}$ is locally computed as follows:\begin{equation}\label{ebet}
+A node $v$'s \emph{$n$-th order ego betweenness} $\BE{n}{v}$ on its ego network $\ENN{n}{v}$ is locally computed as follows:\begin{equation}\label{ebet}
 \BE{n}{v} = \frac{\sum_{s \neq v \neq t \in \V{v}{n}, s<t}\frac{\sigma_{st}^{\mathcal{E}, n}(v)}{\sigma_{st}^{\mathcal{E}, n}}}{(|\V{v}{n}|-1)(|\V{v}{n}|-2)/2} 
-\end{equation} and the \emph{$n$th-order f-ego betweenness} $\BF{n}{v}$ on its f-ego network $\FNN{n}{v}$ is also locally obtained as follows: \begin{equation}\label{eebet}
+\end{equation} and the \emph{$n$-th order f-ego betweenness} $\BF{n}{v}$ on its f-ego network $\FNN{n}{v}$ is also locally obtained as follows: \begin{equation}\label{eebet}
 \BF{n}{v} = \frac{\sum_{s \neq v \neq t \in \V{v}{n}, s<t}\frac{\sigma_{st}^{\mathcal{F}, n}(v)}{\sigma_{st}^{\mathcal{F}, n}}}{(|\V{v}{n}|-1)(|\V{v}{n}|-2)/2}
 \end{equation} where $\sigma_{st}^{\mathcal{E}, n}$ and $\sigma_{st}^{\mathcal{F}, n}$ denote the number of shortest paths from vertex $s$ to vertex $t$ in $\ENN{v}{n}$ and $\FNN{v}{n}$, while $\sigma_{st}^{\mathcal{E}, n}(v)$ and $\sigma_{st}^{\mathcal{F}, n}(v)$ denote the number of shortest paths from vertex $s$ to vertex $t$ through vertex $v$ in $\ENN{v}{n}$ and $\FNN{v}{n}$. 
 
-In this paper, we consider the situations where each node computes its betweenness using either its $n$th-order ego network or $n$th-order f-ego network, and then uses the result as an estimate of its true betweenness in the entire network.
+In this paper, we consider the situations where each node computes its betweenness using either its $n$-th order ego network or $n$-th order f-ego network, and then uses the result as an estimate of its true betweenness in the entire network.
 
 % To compare the accuracy of $\BE{n}{v}$ or $\BX{v}$, we first use the Spearman's rank correlation which measures the {\em monotonic} relationship between the ranked variables of $\BX{v}$ and $\B{v}$ or $\BE{n}{v}$ and $\B{v}$.  The correlation value can vary between -1.0 and +1.0. The closer value is to +1.0, the stronger the association between the values. For the sake of completeness, we also measure the well-known Pearson correlation. The Pearson correlation coefficient assesses a {\em linear} relationship between the two variables and the calculation is based not on the ranked variables, but on the actual betweenness values.
 % For the networks shown in Fig. \ref{}, Table \ref{comparison} shows the comparison of globally computed, ego, and x-ego betweenness. Although the actual betweenness values are different with each other, we can see that 1) the rank order of the three betweenness values are very similar to each other, and 2) the rank order of x-ego betweenness is more similar to the one of globally computed betweenness than the one of ego betweenness. We will verify the details with real mobility trace data in Section IV.

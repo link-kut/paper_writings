@@ -64,6 +64,8 @@
 %% for the whole article with \linenumbers.
 %% \usepackage{lineno}
 
+\mathchardef\mhyphen="2D
+
 \newcommand{\D}[3]{\delta_{{#1}{#2}}({#3})}
 \newcommand{\V}[2]{V_{#2}({#1})}
 \newcommand{\LV}[2]{V_{\le #2}({#1})}
@@ -80,6 +82,7 @@
 \newcommand{\B}[1]{B({#1})}
 \newcommand{\BE}[2]{B_{{#1}}^{\mathcal{E}}({#2})}
 \newcommand{\BF}[2]{B_{{#1}}^{\mathcal{F}}({#2})}
+\newcommand{\BX}[1]{B^{\mathcal{X}}({#1})}
 
 \newcommand{\NX}{n_{x}}
 \newcommand{\MX}{m_{x}}
@@ -121,7 +124,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{Multi-order Egocentric Friendship Network and Its Egocentric Betweenness}
+\title{A Fast Algorithm for Nodal Betweenness Centraility}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -157,31 +160,100 @@ Egocentric \sep Friendship Networks \sep Betweenness Centrality
 
 %% main text
 \section{Introduction}\label{sec:introduction}
-In this section, we define terms that represent two types of egocentric networks, egocentric networks and multi-layered egocentric networks (Section~\ref{x-ego_definition}), as well as the betweenness of a vertex in its ego and x-egocentric networks (Section~\ref{sec:betweenness}).
-We then present several properties of the multi-layered egocentric networks (Section~\ref{x-go_properties}).
-Our betweenness computation algorithm in Section~\ref{computation} takes advantage of these properties.
-
-An egocentric network (also called egocentric network) consists of the alters connected to ego, along with the links between
-ego and alters, and links among alters (\cite{ego:2018}).
-
-
-Our betweenness computation algorithm in Section~\ref{sec:betweenness} takes advantage of these properties.
-
 
 \section{Multi-order Egocentric Friendship Networks and Their Betweenness}\label{sec:multi-order-friendship-network}
-\input{multi-order-friendship-networks}
+
+\begin{table}[t]
+\captionsetup[subfigure]{aboveskip=-2pt, belowskip=-1pt}
+\center
+\caption{Summary of notation}\label{table:symbols}
+\small
+    \begin{tabular}{| p{1.2cm} | p{10cm} |}
+        \hline
+        Symbol & Description \\
+        \hline
+        \hline
+        $V/\{v\}$ & set of all vertices except $v$ \\        
+        $\V{v}{i}$ & set of $i$-hop neighbors of vertex $v$ ($\V{v}{0} = \{ v \}$)\\
+        $\LV{v}{i}$ & set of vertices that are at most $i$ hops away from vertex $v$ (i.e., $\LV{v}{i} = \cup_{k = 0}^{i} \V{v}{k}) $\\
+        $\E{v}{i}$ & set of edges connecting two vertices in $\V{v}{i}$ ($\E{v}{0}$=$\emptyset$)\\
+        $\LE{v}{i}$ & set of edges connecting two vertices in $\LV{v}{i}$\\
+        \hline
+    \end{tabular}
+\end{table}
 
 \section{Betweenness in Multi-order Friendship Networks}\label{sec:betweenness}
-\input{betweenness}
 
-\section{Evaluation}
-\label{evaluation}
+\alglanguage{pseudocode}
+\begin{algorithm}[t]
+\label{alg:main}
+\begin{algorithmic}[1]
+\State $\mathbf{Input}$: a graph $G(V,E)$ and a vertex $v (\in V)$
+\State $\mathbf{Output}$: $betweenness\ of\ {v}$
+\State create an $2$-dimensional array $D[1,2,...,|V|][1,2,...,|V|]$ 
+\State $sum \gets 0$
+\For{$p$ : $1$ to $u$}
+	\For{$q$ : $p+1$ to $u$} 
+		\State $D[p][q] \gets dependency1(p, q, N)$
+		\State $sum \gets sum + D[p][q]$
+	\EndFor
+	\For{$q$ : $u+1$ to $u+w$} 
+		\State $D[p][q] \gets dependency2(p, q, N, D)$
+		\State $sum \gets sum + D[p][q]$
+	\EndFor
+\EndFor
+\For{$p$ : $u+1$ to $u+w$} 
+	\For{$q$ : $p+1$ to $u+w$}
+		\State $D[p][q] \gets dependency2(p, q, N, D)$
+		\State $sum \gets sum + D[p][q]$
+	\EndFor
+\EndFor
+\State \Return{$\frac{2 \cdot sum}{(u+w)(u+w-1)}$} 
+\caption{$nodal\_betweenness(G(V,E), v)$}\label{alg:main}
 
-\section{EEGO}
-\label{eego}
+\end{algorithmic}
+\end{algorithm}
+\alglanguage{pseudocode}
+\begin{algorithm}[t]
+\begin{algorithmic}[1]
+\State $\mathbf{Input}$: $p$, $q$, $N[0,1,...,u+w]$
+\If{$q \in N[p]$}
+	\State \Return{$0$} \Comment{by Theorem 1}
+\Else
+	\State \Return{$1/{\mid N[p] \cap N[q] \mid}$} \Comment{by Theorem 2}
+\EndIf
+\caption{$dependency1(p, q, N)$}
+\label{alg:dependency1}
+\end{algorithmic}
+\end{algorithm}
+\alglanguage{pseudocode}
+\begin{algorithm}[t]
+\begin{algorithmic}[1]
+\State $\mathbf{Input}$: $p$, $q$, $N[0,1,...,u+w]$, $D[1,2,...,u+w][1,2,...,u+w]$
+\State $C \gets []$\;
+\For{each $r \in N[q]$}
+	\If {$p < r$}
+		\State $\tau = D[p][r]$
+	\Else 
+		\State $\tau = D[r][p]$
+	\EndIf
+	\If {$\tau==0$}
+		\State \Return{0} \Comment{by Theorem 3}
+	\Else 
+		\State append $\tau$ to $C$
+	\EndIf
+\EndFor
+\State \Return{$\bar{H}(C)$}    \Comment{by Theorem 4}
+\caption{$dependency2(p, q, N, D)$}
+\label{alg:dependency2}
+\end{algorithmic}
+\end{algorithm}
 
-\section{Computation}
-\label{computation}
+\section{Evaluation}\label{evaluation}
+
+\section{EEGO}\label{eego}
+
+\section{Computation}\label{computation}
 
 
 %% The Appendices part is started with the command \appendix;

@@ -1,2 +1,14 @@
-In this section, we propose a new algorithm to calculate the betweenness centrality in the multi-oder friendship
-networks.
+In this section, we provides an overview of previous work on betweenness computation (Section \ref{sec:pre-bet}), presents our algorithm for quickly computing nodal betweenness in multi-order friendship networks (Section \ref{sec:nodal-bet}), and analytically shows the benefits of our algorithm (Section \ref{sec:complexity}).
+
+\subsection{Previous work on betweenness computation
+}\label{sec:pre-bet}
+
+To the best of our knowledge, the fastest algorithm for computing the betweenness of every vertex in a given graph is developed by Brandes \cite{Brandes01afaster}. Given an unweighted graph, the Brandes algorithm performs a breadth first search to compute the number of shortest paths from any pair of two vertices. It then derives the betweenness of each vertex by aggregating the previously computed count values backwards along the edges. Given an unweighted graph $G(V,E)$, this Brandes algorithm takes $O(|V||E|)$ time.
+
+The proposed node-centric betweenness of a vertex can be obtained by calculating the betweenness of that single vertex in the corresponding multi-order friendship network. Applying the Brandes algorithm to the multi-order network, however, results in finding the betweenness of every vertex in the network (i.e., the Brandes algorithm incurs overhead to find needless information). Section \ref{sec:nodal-bet} provides our algorithm that quickly computes the nodal betweenness by computing the betweenness of only the target vertex and by skipping computations according to the properties of multi-order friendship networks explained in Section \ref{mfn_properties}.
+
+
+\subsection{Our nodal betweenness computation
+}\label{sec:nodal-bet}
+
+\subsection{Algorithm Complexity}\label{sec:complexity}
