@@ -161,6 +161,14 @@ Egocentric \sep Friendship Networks \sep Betweenness Centrality
 %% main text
 \section{Introduction}\label{sec:introduction}
 
+In social network analysis, the betweenness of an actor indicates the extent to which that actor is between all other actors within the network (\cite{centrality}).
+
+Calculating the betweenness of each node, however, requires finding all of the shortest paths between every pair of nodes in the given network.
+Since carrying out this task in a large wireless network will incur prohibitively expensive computational costs, techniques for estimating betweenness have been developed~\cite{SIMBET,egocentric,everett,ICCN:lbcdna,Pant13:Local}.
+In these techniques, each node identifies its \emph{ego network}, a logical network consisting of that node, its 1-hop neighbors, and all links between these nodes.
+Then, each node calculates, as an estimate of its betweenness in the entire network, its betweenness only in its ego network, thereby saving both network and computational resources.
+
+
 \section{Multi-order Egocentric Friendship Networks and Their Betweenness}\label{sec:multi-order-friendship-network}
 
 \begin{table}[t]
